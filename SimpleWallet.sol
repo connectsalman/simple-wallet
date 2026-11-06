@@ -11,4 +11,8 @@ contract SimpleWallet {
     function deposit() public payable {
        require(msg.value > 0, "Send some Eth"); 
     }
+
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
 }
