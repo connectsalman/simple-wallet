@@ -8,4 +8,7 @@ contract SimpleWallet {
         owner = msg.sender;
     }
 
+    function deposit() public payable {
+       require(msg.value > 0, "Send some Eth"); 
+    }
 }
