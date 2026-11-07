@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiler files
 cache/
 out/
@@ -18,3 +19,7 @@ docs/
 .env
 .env.*
 !.env.example
+=======
+.env
+node_modules/
+>>>>>>> e7cb7723f98e900d82280cdaaf12bd37d824dcf8
