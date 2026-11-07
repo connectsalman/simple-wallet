@@ -23,3 +23,6 @@ payable, msg.sender, msg.value, modifiers, require and events.
 - The owner cannot be changed
 - Withdraw sends the whole balance
 - Not audited, so do not use it with real money
+
+## Run the tests
+Install Foundry, then run: forge test
