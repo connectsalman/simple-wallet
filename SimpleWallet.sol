@@ -2,40 +2,40 @@
 pragma solidity ^0.8.20;
 
 contract SimpleWallet {
-    // Step 2a: who owns the wallet
+    // The wallet owner, set when the contract is deployed
     address public owner;
 
-    // Step 7a: events are declared at contract level, outside any function
+    // Announcements for deposits and withdrawals
     event Deposited(address from, uint256 amount);
     event Withdrawn(address to, uint256 amount);
 
-    // Step 2b: runs once at deployment, so the deployer becomes the owner
+    // Runs once at deployment: the deployer becomes the owner
     constructor() {
         owner = msg.sender;
     }
 
-    // Step 5: owner-only rule, written once and attached by name
+    // Rule: only the owner can run functions that use this
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can do this");
         _;
     }
 
-    // Step 3: anyone can send ETH here
+    // Anyone can send ETH to this wallet
     function deposit() public payable {
         require(msg.value > 0, "Send some ETH");
-        emit Deposited(msg.sender, msg.value);   // Step 7b
+        emit Deposited(msg.sender, msg.value);
     }
 
-    // Step 4: read how much ETH the contract holds
+    // Shows how much ETH the wallet holds, in wei
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
 
-    // Step 6: only the owner can take the ETH out
+    // Only the owner can take all the ETH out
     function withdraw() public onlyOwner {
         uint256 amount = address(this).balance;
         (bool sent, ) = payable(owner).call{value: amount}("");
         require(sent, "Withdraw failed");
-        emit Withdrawn(owner, amount);           // Step 7c
+        emit Withdrawn(owner, amount);
     }
 }
