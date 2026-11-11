@@ -34,7 +34,7 @@ contract SimpleWallet {
     // Only the owner can take all the ETH out
     function withdraw() public onlyOwner {
         uint256 amount = address(this).balance;
-        (bool sent, ) = payable(owner).call{value: amount}("");
+        (bool sent,) = payable(owner).call{value: amount}("");
         require(sent, "Withdraw failed");
         emit Withdrawn(owner, amount);
     }
